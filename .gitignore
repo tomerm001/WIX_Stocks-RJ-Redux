@@ -6,3 +6,4 @@ typings
 maven
 velocity.private.data.js
 test/e2e/screenshots
+.idea/

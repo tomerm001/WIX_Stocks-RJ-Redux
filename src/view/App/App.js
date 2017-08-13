@@ -2,32 +2,17 @@ import React, {Component} from 'react';
 import s from './App.scss';
 import SearchView from '../search/SearchView';
 import stocksAPI from '../../stocks/stocks';
+import {connect} from 'react-redux';
+
+//action creators
+import {updateTerm, searchTerm} from './index';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      term: '',
-      results: [{symbol: 'wix', name: 'Wix.com', price: 32, change: 0.344}]
-    };
-  }
-
-  search() {
-    if (this.state.term === '') {
-      this.setState({results: []});
-    }
-    else {
-      stocksAPI.searchStocks(this.state.term)
-        .then(data => {
-          this.setState({results: data});
-        });
-    }
-  }
-
   inputChange(e) {
     const value = e.target.value;
-    this.search();
-    this.setState({term: value});
+
+    this.props.updateTerm(value);
+    this.props.searchStocks(value);
   }
 
   render() {
@@ -44,12 +29,32 @@ class App extends Component {
         </div>
         <SearchView
           inputChange={this.inputChange.bind(this)}
-          term={this.state.term}
-          results={this.state.results}
+          term={this.props.term}
+          results={this.props.results}
         />
       </div>
     );
   }
 }
 
-export default App;
+//REDUX
+const mapStateToProps = state => {
+  return state;
+};
+
+const mapDispatchToProps = dispatch => {
+  const updateValue = value => {
+    dispatch(updateTerm(value));
+  };
+
+  const searchStocks = value => {
+    dispatch(searchTerm(value));
+  };
+
+  return {updateTerm: updateValue, searchStocks};
+};
+
+const SmartApp = connect(mapStateToProps, mapDispatchToProps)(App);
+
+
+export default SmartApp;

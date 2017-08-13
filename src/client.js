@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/view/App';
+import App from './view/App';
 
 ReactDOM.render(
   <App/>,

@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import s from './App.scss';
 import SearchView from '../search/SearchView';
-import stocksAPI from '../../stocks/stocks';
 import {connect} from 'react-redux';
 
 //action creators
-import {updateTerm, searchTerm} from './index';
-
+import {updateTerm, searchTerm} from '../../model/actions';
+console.log(updateTerm);
 class App extends Component {
   inputChange(e) {
-    const value = e.target.value;
+    const {value} = e.target;
 
     this.props.updateTerm(value);
     this.props.searchStocks(value);
@@ -55,6 +54,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 const SmartApp = connect(mapStateToProps, mapDispatchToProps)(App);
-
 
 export default SmartApp;

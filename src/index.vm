@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>${title}</title>
     <link rel="stylesheet" href="${clientTopology.staticsBaseUrl}app#if(!${debug}).min#{end}.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
   </head>
   <body>
     <div id="visit-count">Visit count: ${visitCount}</div>
